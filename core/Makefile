@@ -1601,7 +1601,7 @@ else
     OTA_FROM_TARGET_SCRIPT := $(TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT)
 endif
 
-AOD_VENDOR_EXISTS = $(strip $(wildcard $(TOP)/vendor/aod/vendor.mk))
+AOD_VENDOR_EXISTS = $(strip $(wildcard $(TOP)/vendor/hybrid/vendor.mk))
 ifneq ($(AOD_VENDOR_EXISTS),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 else
@@ -1621,6 +1621,10 @@ ifneq ($(TARGET_UNIFIED_DEVICE),)
     endif
 endif
 
+ifeq ($(CUSTOM_EXTRA_SCRIPT),)
+    CUSTOM_EXTRA_SCRIPT := vendor/hybrid/ramdisk/suinstaller.recovery
+endif
+
 $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 	@echo "$(OTA_FROM_TARGET_SCRIPT)" > $(PRODUCT_OUT)/ota_script_path
 	@echo "$(override_device)" > $(PRODUCT_OUT)/ota_override_device
@@ -1631,6 +1635,7 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 	   -k $(KEY_CERT_PAIR) \
 	   --backup=$(backuptool) \
 	   --override_device=$(override_device) $(override_prop) \
+	   --extra_script=$(CUSTOM_EXTRA_SCRIPT) \
 	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
 	   $(BUILT_TARGET_FILES_PACKAGE) $@
 
@@ -1954,3 +1959,4 @@ endif
 ifneq ($(sdk_repo_goal),)
 include $(TOPDIR)development/build/tools/sdk_repo.mk
 endif
+
