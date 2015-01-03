@@ -29,14 +29,12 @@ PRODUCT_PACKAGES := \
 
 PRODUCT_PACKAGES += \
     Galaxy4 \
-    HoloSpiralWallpaper \
     LiveWallpapers \
     LiveWallpapersPicker \
     MagicSmokeWallpapers \
     NoiseField \
     PhaseBeam \
     VisualizationWallpapers \
-    PhotoTable
 
 # Additional settings used in all AOSP builds
 PRODUCT_PROPERTY_OVERRIDES := \
@@ -63,4 +61,4 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/locales_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_no_telephony.mk)
 
 # Call the vendor if it exists
-$(call inherit-product-if-exists, vendor/aod/vendor.mk)
+$(call inherit-product-if-exists, vendor/hybrid/vendor.mk)

@@ -1601,8 +1601,8 @@ else
     OTA_FROM_TARGET_SCRIPT := $(TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT)
 endif
 
-AOD_VENDOR_EXISTS = $(strip $(wildcard $(TOP)/vendor/hybrid/vendor.mk))
-ifneq ($(AOD_VENDOR_EXISTS),)
+HYBRID_VENDOR_EXISTS = $(strip $(wildcard $(TOP)/vendor/hybrid/vendor.mk))
+ifneq ($(HYBRID_VENDOR_EXISTS),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 else
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
