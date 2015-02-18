@@ -19,8 +19,9 @@
 
 PRODUCT_PACKAGES := \
     Bluetooth \
-    Camera2 \
+    SnapdragonCamera \
     Gallery2 \
+    MusicFX \
     OneTimeInitializer \
     Provision \
     SystemUI \
