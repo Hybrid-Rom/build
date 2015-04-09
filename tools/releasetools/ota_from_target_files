@@ -570,7 +570,25 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if OPTIONS.backuptool:
     script.Mount("/system")
     script.RunBackup("backup")
-    script.Unmount("/system")
+    if not OPTIONS.mount_by_label:
+      script.Unmount("/system")
+
+  script.ShowProgress(0.5, 0)
+
+  if OPTIONS.wipe_user_data:
+    script.Print("Formatting /data")
+    script.FormatPartition("/data", OPTIONS.mount_by_label)
+
+script.Print("#######################################");
+script.Print("#    _          _____  #");           
+script.Print("#   | |        |  __ \  #");         
+script.Print("#   | |  ______| |__) |__  _ __  #"); 
+script.Print("#   | | |______|  ___/ _ \| '_ \  #");
+script.Print("#   | |____    | |  | (_) | |_) | #");
+script.Print("#   |______|   |_|   \___/| .__/  #");
+script.Print("#                         | |  #");
+script.Print("#                         |_|  #");   
+script.Print("#######################################");");
 
   system_progress = 0.75
 
